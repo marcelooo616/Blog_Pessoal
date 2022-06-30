@@ -11,16 +11,27 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.UpdateTimestamp;
+
+//@Entity transforma o objeto de postagem em uma tabela no banco de dados
 @Entity
-@Table(name = "postagem")
+
+//@Table da o nome para a tabela no banco de dados
+@Table(name = "tb_postagem")
 
 public class Postagem {
-	
+	//@Id define a chave primaria (PRIMARY KEY)
 	@Id
+	
+	//@GeneratedValue fara o auto_increment no id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private long id;   
 	
+	//@NotNull indica o titulo como campo abrigatorio
 	@NotNull
+	
+	//@Size indica a quantitade de caractere do titulo minimo de 5 e no maximo 100
 	@Size(min = 5 , max = 100)
 	private String titulo;  
 	
@@ -29,7 +40,10 @@ public class Postagem {
 	@Size(min = 10, max = 500)
 	private String texto; 
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	// pega automaticamente hora e data do seu computador
+	
+	//@Temporal(TemporalType.TIMESTAMP)
+	@UpdateTimestamp
 	private Date date =  new java.sql.Date(System.currentTimeMillis());   	
 	
 	
