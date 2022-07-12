@@ -19,7 +19,7 @@ public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
 
 	// cadastrando user
-	public Optional<Usuario> cadastrarUsuari(Usuario usuario) {
+	public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
 		if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())
 			Optional.empty();
 		usuario.setSenha(criptografarSenha(usuario.getSenha()));
