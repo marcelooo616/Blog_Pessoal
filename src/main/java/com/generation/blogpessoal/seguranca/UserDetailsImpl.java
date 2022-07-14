@@ -7,28 +7,24 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.generation.blogpessoal.model.Usuario;
 
-public class UserDetailsImpl  implements UserDetails {
-	
-	
+public class UserDetailsImpl implements UserDetails {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private String UserName;
 	private String password;
-	
+
 	public UserDetailsImpl(Usuario user) {
 		this.UserName = user.getUsuario();
 		this.password = user.getSenha();
 	}
-	
-	public UserDetailsImpl() {
-		
-	}
-	
-	
 
+	public UserDetailsImpl() {
+
+	}
 
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {		
+	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return null;
 	}
 
