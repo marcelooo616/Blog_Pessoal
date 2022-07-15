@@ -11,9 +11,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Entity
 @Table(name = "tb_usuario")
@@ -23,17 +26,20 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
+	@NotBlank(message = "O atributo Nome é Obrigatório!")
 	@Size(min = 2, max = 100)
 	private String nome;
-
-	@NotBlank
+	
+	@Schema(example = "email@email.com.br")
+	@NotBlank(message = "O atributo Usuário é Obrigatório!")
+	@Email(message = "O atributo Usuário deve ser um email válido!")
 	@Size(min = 5, max = 100)
-	@Email
 	private String usuario;
 
-	@NotBlank
+	@Schema(example = "Casa_616")
+	@NotBlank(message = "O atributo Senha é Obrigatório!")
 	@Size(min = 5, max = 100)
+	@Pattern(regexp = "\\A(?=\\S*?[0-9])(?=\\S*?[a-z])(?=\\S*?[A-Z])(?=\\S*?[@#$%^&+=])\\S{8,}\\z", message = "O atributo Senha deve conter caracter especial e maiusculo")
 	private String senha;
 
 	private String foto;

@@ -2,6 +2,8 @@ package com.generation.blogpessoal.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,39 +26,45 @@ import com.generation.blogpessoal.repository.TemaRepository;
 
 public class TemaController {
 	@Autowired
-	private TemaRepository repository;
+	private TemaRepository temaRepository;
 	
 	//construindo andpoits
 	//@GetMapping ira traze toda a infomação relacionada ao tema buscado no banco de dados
 	@GetMapping
 	public ResponseEntity<List<Tema>> listaDeTema(){
-		return ResponseEntity.ok(repository.findAll());
+		return ResponseEntity.ok(temaRepository.findAll());
 	}
 	
 	@GetMapping ("/{id}")
     public ResponseEntity<Tema> buscaId(@PathVariable long id){
-		return repository.findById(id).map(resp -> ResponseEntity.ok(resp))
+		return temaRepository.findById(id).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
 	@GetMapping("/nome/{nome}")
 	public ResponseEntity<List<Tema>> buscaNome (@PathVariable String nome){
-		return ResponseEntity.ok(repository.findAllByDescricaoContainingIgnoreCase(nome));
+		return ResponseEntity.ok(temaRepository.findAllByDescricaoContainingIgnoreCase(nome));
 	}
 	
 	
 	@PostMapping
 	public ResponseEntity<Tema> inserirTema(@RequestBody Tema tema){
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(tema));
+		return ResponseEntity.status(HttpStatus.CREATED).body(temaRepository.save(tema));
 		
 	}
 	@PutMapping
-	public ResponseEntity<Tema> atualizaTema(@RequestBody Tema tema){
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(repository.save(tema));
+	public ResponseEntity<Tema> putTema(@Valid @RequestBody Tema tema) {
+					
+		return temaRepository.findById(tema.getId())
+				.map(resposta -> {
+					return ResponseEntity.ok().body(temaRepository.save(tema));
+				})
+				.orElse(ResponseEntity.notFound().build());
+
 	}
 	@DeleteMapping("/{id}")
     public void delete(@PathVariable long id) {
-		repository.deleteById(id);
+		temaRepository.deleteById(id);
 	}
 	
 	

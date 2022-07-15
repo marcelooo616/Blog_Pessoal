@@ -28,11 +28,11 @@ import com.generation.blogpessoal.service.UsuarioService;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UsuarioControllerTest {
 
-	@SuppressWarnings("unused")
+	
 	@Autowired
 	private TestRestTemplate testRestTemplate;
 
-	@SuppressWarnings("unused")
+	
 	@Autowired
 	private UsuarioService usuarioService;
 
