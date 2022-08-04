@@ -27,18 +27,18 @@ public class Usuario {
 	private Long id;
 
 	@NotBlank(message = "O atributo Nome é Obrigatório!")
-	@Size(min = 2, max = 30)
+	@Size(min = 2, max = 100)
 	private String nome;
 	
 	@Schema(example = "email@email.com.br")
 	@NotBlank(message = "O atributo Usuário é Obrigatório!")
 	@Email(message = "O atributo Usuário deve ser um email válido!")
-	@Size(min = 4, max = 30)
+	@Size(min = 4, max = 100)
 	private String usuario;
 
 	@Schema(example = "Casa_616")
 	@NotBlank(message = "O atributo Senha é Obrigatório!")
-	@Size(min = 4, max = 30)
+	@Size(min = 4, max = 100)
 	//@Pattern(regexp = "\\A(?=\\S*?[0-9])(?=\\S*?[a-z])(?=\\S*?[A-Z])(?=\\S*?[@#$%^&+=_-/.<>;:-&¨!'])\\S{8,}\\z", message = "O atributo Senha deve conter caracter especial e maiusculo")
 	private String senha;
 
