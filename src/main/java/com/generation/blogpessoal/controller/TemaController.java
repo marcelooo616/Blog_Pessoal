@@ -52,7 +52,7 @@ public class TemaController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(temaRepository.save(tema));
 		
 	}
-	@PutMapping("/{id}")
+	@PutMapping
 	public ResponseEntity<Tema> putTema(@Valid @RequestBody Tema tema) {					
 		return temaRepository.findById(tema.getId())
 				.map(resposta -> {
